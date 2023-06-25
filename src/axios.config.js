@@ -1,7 +1,7 @@
 import axiosLib from "axios";
 
 const axios = axiosLib.create({
-  baseURL: "http://localhost:8000",
+  baseURL: process.env.SERVER,
 });
 
 axios.interceptors.request.use((request) => {
