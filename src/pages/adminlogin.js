@@ -15,9 +15,12 @@ function Adminlogin() {
         password: md5(password),
       },
     });
-    const adminResult = response.data.data;
-    localStorage.setItem("admin", JSON.stringify(adminResult));
-    route.push("/admin");
+    if (response.data.status == 1) {
+      localStorage.setItem("admin", JSON.stringify(adminResult));
+      route.push("/admin");
+    } else {
+      alert("Wrong credentials!");
+    }
   };
 
   return (
@@ -51,7 +54,7 @@ function Adminlogin() {
 
           <div class="input-group mb-3">
             <input
-              type="text"
+              type="password"
               class="form-control"
               placeholder="Password"
               aria-label="Recipient's username"

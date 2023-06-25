@@ -1,6 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import axios from "../axios.config";
+import { useRouter } from "next/router";
 import {
   Modal,
   ModalOverlay,
@@ -13,6 +14,7 @@ import {
 } from "@chakra-ui/react";
 
 function Admin() {
+  const route = useRouter();
   const [showAddCentreModal, setShowAddCentreModal] = React.useState(false);
   const [name, setName] = React.useState("");
   const [city, setCity] = React.useState("");
@@ -64,6 +66,12 @@ function Admin() {
     alert("Successfully deleted!");
   };
 
+  const logout = () => {
+    localStorage.removeItem("admin");
+    route.push("/login");
+    if (localStorage.getItem("admin") === null) route.push("/adminlogin");
+  };
+
   return (
     <div>
       <nav className="navbar navbar-expand-lg bg-body-tertiary mb-5">
@@ -105,7 +113,7 @@ function Admin() {
               </li>
             </ul>
             <form class="d-flex" role="search">
-              <button class="btn btn-success" type="submit">
+              <button class="btn btn-success" type="submit" onClick={logout}>
                 Logout
               </button>
             </form>

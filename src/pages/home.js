@@ -9,6 +9,7 @@ function Home() {
     route.push("/login");
     if (localStorage.getItem("user") === null) route.push("/login");
   };
+  
   React.useEffect(() => {
     const user = localStorage.getItem("user");
     if (!(user && user.length > 0)) {
