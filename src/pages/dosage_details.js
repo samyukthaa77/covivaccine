@@ -21,6 +21,13 @@ function Dosage() {
     getCentreDetails();
   }, [route.query]);
 
+  React.useEffect(() => {
+    const user = localStorage.getItem("user");
+    if (!(user && user.length > 0)) {
+      route.push("/login");
+    }
+  }, []);
+
   return (
     <div>
       <nav class="navbar navbar-expand-lg bg-body-secondary mb-5">

@@ -9,6 +9,14 @@ function Success() {
     route.push("/login");
     if (localStorage.getItem("user") === null) route.push("/login");
   };
+
+  React.useEffect(() => {
+    const user = localStorage.getItem("user");
+    if (!(user && user.length > 0)) {
+      route.push("/login");
+    }
+  }, []);
+
   return (
     <div>
       <nav class="navbar navbar-expand-lg bg-body-tertiary mb-5">

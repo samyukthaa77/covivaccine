@@ -1,8 +1,10 @@
 import React from "react";
 import Link from "next/link";
 import axios from "@/axios.config";
+import { useRouter } from "next/router";
 
 function Centres() {
+  const route = useRouter();
   const [centres, setCentres] = React.useState([]);
   const [centresFiltered, setCentresFiltered] = React.useState([]);
   const [searchText, setSearchText] = React.useState("");
@@ -14,6 +16,13 @@ function Centres() {
       setCentresFiltered(centres);
     };
     getAllCentres();
+  }, []);
+
+  React.useEffect(() => {
+    const user = localStorage.getItem("user");
+    if (!(user && user.length > 0)) {
+      route.push("/login");
+    }
   }, []);
 
   React.useEffect(() => {
@@ -88,7 +97,7 @@ function Centres() {
       </nav>
 
       <div className="m-5 row">
-        <h3>Search a city or centre</h3>
+        <h4 style={{ marginLeft: 10 }}>Search a centre name:</h4>
         <div className="col-6 d-flex">
           <input
             type="search"

@@ -1,8 +1,10 @@
 import React from "react";
 import Link from "next/link";
 import axios from "@/axios.config";
+import { useRouter } from "next/router";
 
 function Profile() {
+  const route = useRouter();
   const [profile, setProfile] = React.useState([]);
   React.useEffect(() => {
     const getUserProfile = async () => {
@@ -11,6 +13,13 @@ function Profile() {
       setProfile(profile);
     };
     getUserProfile();
+  }, []);
+
+  React.useEffect(() => {
+    const user = localStorage.getItem("user");
+    if (!(user && user.length > 0)) {
+      route.push("/login");
+    }
   }, []);
 
   return (

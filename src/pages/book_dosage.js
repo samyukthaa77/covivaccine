@@ -18,6 +18,14 @@ function BookDosage() {
     React.useState(false);
   const route = useRouter();
   const [centre, setCentre] = React.useState([]);
+  
+  React.useEffect(() => {
+    const user = localStorage.getItem("user");
+    if (!(user && user.length > 0)) {
+      route.push("/login");
+    }
+  }, []);
+
   React.useEffect(() => {
     const getCentreDetails = async () => {
       const centreId = route.query.centreId;

@@ -33,6 +33,13 @@ function Admin() {
     getAllCentres();
   }, []);
 
+  React.useEffect(() => {
+    const user = localStorage.getItem("admin");
+    if (!(user && user.length > 0)) {
+      route.push("/adminlogin");
+    }
+  }, []);
+
   const addCentre = async () => {
     const response = await axios.post("/admin/addCentre", {
       centreData: {
