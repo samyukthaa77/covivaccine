@@ -36,6 +36,12 @@ function Centres() {
     }
   }, [searchText]);
 
+  const logout = () => {
+    localStorage.removeItem("user");
+    route.push("/login");
+    if (localStorage.getItem("user") === null) route.push("/login");
+  };
+
   return (
     <div>
       <nav className="navbar navbar-expand-lg bg-body-tertiary mb-5">
@@ -87,11 +93,9 @@ function Centres() {
                 Search
               </button>
             </form> */}
-            <form class="d-flex" role="search">
-              <button class="btn btn-success" type="submit">
-                Logout
-              </button>
-            </form>
+            <button class="btn btn-success" type="submit" onClick={logout}>
+              Logout
+            </button>
           </div>
         </div>
       </nav>

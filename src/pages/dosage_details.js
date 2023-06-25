@@ -28,6 +28,12 @@ function Dosage() {
     }
   }, []);
 
+  const logout = () => {
+    localStorage.removeItem("admin");
+    route.push("/adminlogin");
+    if (localStorage.getItem("admin") === null) route.push("/adminlogin");
+  };
+
   return (
     <div>
       <nav class="navbar navbar-expand-lg bg-body-secondary mb-5">
@@ -64,6 +70,9 @@ function Dosage() {
                 </Link>
               </li>
             </ul>
+            <button class="btn btn-success" type="submit" onClick={logout}>
+              Logout
+            </button>
           </div>
         </div>
       </nav>

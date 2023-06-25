@@ -22,6 +22,12 @@ function Profile() {
     }
   }, []);
 
+  const logout = () => {
+    localStorage.removeItem("user");
+    route.push("/login");
+    if (localStorage.getItem("user") === null) route.push("/login");
+  };
+
   return (
     <div>
       <nav class="navbar navbar-expand-lg bg-body-tertiary mb-5">
@@ -59,7 +65,7 @@ function Profile() {
               </li>
             </ul>
             <form class="d-flex" role="search">
-              <button class="btn btn-success" type="submit">
+              <button class="btn btn-success" type="submit" onClick={logout}>
                 Logout
               </button>
             </form>

@@ -18,7 +18,7 @@ function BookDosage() {
     React.useState(false);
   const route = useRouter();
   const [centre, setCentre] = React.useState([]);
-  
+
   React.useEffect(() => {
     const user = localStorage.getItem("user");
     if (!(user && user.length > 0)) {
@@ -50,6 +50,12 @@ function BookDosage() {
     });
     alert("Booked successfully!");
     route.push("/success");
+  };
+
+  const logout = () => {
+    localStorage.removeItem("user");
+    route.push("/login");
+    if (localStorage.getItem("user") === null) route.push("/login");
   };
 
   return (
@@ -92,17 +98,9 @@ function BookDosage() {
                 </Link>
               </li>
             </ul>
-            <form className="d-flex" role="search">
-              <input
-                className="form-control me-2"
-                type="search"
-                placeholder="Search"
-                aria-label="Search"
-              />
-              <button className="btn btn-outline-success" type="submit">
-                Search
-              </button>
-            </form>
+            <button class="btn btn-success" type="submit" onClick={logout}>
+              Logout
+            </button>
           </div>
         </div>
       </nav>

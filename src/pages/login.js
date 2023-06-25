@@ -19,7 +19,7 @@ function Login() {
     const userResult = response.data.data;
     if (response.data.status == 1) {
       localStorage.setItem("user", JSON.stringify(userResult));
-      route.push("/home");
+      route.push("/centres");
     } else {
       alert("Wrong credentials!");
     }
@@ -77,6 +77,15 @@ function Login() {
               Don't have an account?{" "}
               <Link style={{ color: "blue" }} href="/signup">
                 <ins>Sign Up here</ins>
+              </Link>
+            </p>
+          </div>
+
+          <div>
+            <p>
+              Are you an admin?{" "}
+              <Link href="/adminlogin" style={{ color: "blue" }}>
+                <ins>Login here</ins>
               </Link>
             </p>
           </div>

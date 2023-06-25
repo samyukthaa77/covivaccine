@@ -9,7 +9,7 @@ function Home() {
     route.push("/login");
     if (localStorage.getItem("user") === null) route.push("/login");
   };
-  
+
   React.useEffect(() => {
     const user = localStorage.getItem("user");
     if (!(user && user.length > 0)) {
@@ -22,7 +22,7 @@ function Home() {
       <nav class="navbar navbar-expand-lg bg-body-tertiary mb-5">
         <div class="container-fluid">
           <Link class="navbar-brand" href="/centres">
-            Navbar
+            CoviVaccine
           </Link>
           <button
             class="navbar-toggler"
@@ -53,21 +53,28 @@ function Home() {
                 </Link>
               </li>
             </ul>
-            <button class="btn btn-success" type="submit" onClick={logout}>
-              Logout
-            </button>
+            <Link href="/signup" style={{marginRight: 20}}>
+              <button class="btn btn-success" type="submit">
+                Sign Up
+              </button>
+            </Link>
+            <Link href="/login" style={{marginRight: 10}}>
+              <button class="btn btn-success" type="submit">
+                Login
+              </button>
+            </Link>
           </div>
         </div>
       </nav>
 
-      <div class="row m-5">
+      <div class="row" style={{marginLeft: 10}}>
         <div class="col-sm-4 mb-3 mb-sm-0">
           <div class="card" style={{ width: 400 }}>
             <img src="carousel1.jpg" class="card-img-top" alt="" />
             <div class="card-body">
               <p class="card-text">
-                Some quick example text to build on the card title and make up
-                the bulk of the card's content.
+                "A short period of discomfort is a whole lot better than being
+                in the ICU" - William Schaffner
               </p>
             </div>
           </div>
@@ -77,8 +84,8 @@ function Home() {
             <img src="carousel2.jpg" class="card-img-top" alt="" />
             <div class="card-body">
               <p class="card-text">
-                Some quick example text to build on the card title and make up
-                the bulk of the card's content.
+                I'd much rather have the vaccine than have the virus" - Paul A.
+                Volberding
               </p>
             </div>
           </div>
@@ -88,8 +95,8 @@ function Home() {
             <img src="carousel3.jpg" class="card-img-top" alt="" />
             <div class="card-body">
               <p class="card-text">
-                Some quick example text to build on the card title and make up
-                the bulk of the card's content.
+                "Better have a 100 million people get one dose rather than half
+                the people get two" - Buddy Creech
               </p>
             </div>
           </div>
@@ -100,28 +107,26 @@ function Home() {
         <div class="col-sm-6 mb-3 mb-sm-0">
           <div class="card">
             <div class="card-body">
-              <h5 class="card-title">Special title treatment</h5>
+              <h5 class="card-title">Explore our vaccination centres</h5>
               <p class="card-text">
-                With supporting text below as a natural lead-in to additional
-                content.
+                Book your appointment with no hastle and get your vaccination dose as soon as possible!
               </p>
-              <a href="#" class="btn btn-primary">
-                Go somewhere
-              </a>
+              <Link href="/centres" class="btn btn-primary">
+                View centres
+              </Link>
             </div>
           </div>
         </div>
         <div class="col-sm-6">
           <div class="card">
             <div class="card-body">
-              <h5 class="card-title">Special title treatment</h5>
+              <h5 class="card-title">More information</h5>
               <p class="card-text">
-                With supporting text below as a natural lead-in to additional
-                content.
+                Learn more about COVID-19 and get updated with latest news to equip yourself with knowledge about protection against the virus!
               </p>
-              <a href="#" class="btn btn-primary">
-                Go somewhere
-              </a>
+              <Link href="https://covid19response.who.foundation/" class="btn btn-primary">
+                WHO organization
+              </Link>
             </div>
           </div>
         </div>

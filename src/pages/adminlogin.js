@@ -1,6 +1,7 @@
 import React from "react";
 import md5 from "md5";
 import axios from "@/axios.config";
+import Link from "next/link";
 import { useRouter } from "next/router";
 
 function Adminlogin() {
@@ -68,6 +69,15 @@ function Adminlogin() {
             <button class="btn btn-primary" type="submit" onClick={adminLogin}>
               Submit
             </button>
+          </div>
+
+          <div>
+            <p>
+              Are you a customer?{" "}
+              <Link href="/login" style={{ color: "blue" }}>
+                <ins>Login here</ins>
+              </Link>
+            </p>
           </div>
         </div>
       </div>
