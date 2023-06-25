@@ -23,15 +23,15 @@ function Dosage() {
 
   React.useEffect(() => {
     const user = localStorage.getItem("user");
-    if (!(user && user.length > 0)) {
-      route.push("/login");
+    const userParsed = JSON.parse(user);
+    if (!(user && user.length > 0) || userParsed.type != "admin") {
+      route.push("/adminlogin");
     }
   }, []);
 
   const logout = () => {
-    localStorage.removeItem("admin");
+    localStorage.removeItem("user");
     route.push("/adminlogin");
-    if (localStorage.getItem("admin") === null) route.push("/adminlogin");
   };
 
   return (
@@ -39,7 +39,7 @@ function Dosage() {
       <nav class="navbar navbar-expand-lg bg-body-secondary mb-5">
         <div class="container-fluid">
           <Link class="navbar-brand" href="/centres">
-            Navbar
+            CoviVaccine
           </Link>
           <button
             class="navbar-toggler"
@@ -77,28 +77,59 @@ function Dosage() {
         </div>
       </nav>
 
-      <div
-        class="card"
-        style={{
-          display: "flex",
-          boxShadow: "0 0 8px 5px #cec7c759",
-          width: 800,
-          marginTop: 50,
-          marginLeft: 250,
-        }}
-      >
-        <div class="card-body">
-          <h5 class="card-title">{centre.name}</h5>
-          <h6 class="card-subtitle mt-2 mb-4 text-body-secondary">
-            {centre.city}
-          </h6>
-          <hr />
-          <p class="card-text">Total bookings:</p>
-          <p class="card-text">
-            Working hours: {centre.start} - {centre.end}
-          </p>
+      {centre.centreDetails ? (
+        <div
+          class="card"
+          style={{
+            display: "flex",
+            boxShadow: "0 0 8px 5px #cec7c759",
+            width: 800,
+            marginTop: 50,
+            marginLeft: 250,
+          }}
+        >
+          <div class="card-body">
+            <h5 class="card-title">{centre.centreDetails.name}</h5>
+            <h6 class="card-subtitle mt-2 mb-4 text-body-secondary">
+              {centre.centreDetails.city}
+            </h6>
+            <hr />
+            <p class="card-text">
+              Working hours: {centre.centreDetails.start} -{" "}
+              {centre.centreDetails.end}
+            </p>
+          </div>
         </div>
-      </div>
+      ) : null}
+
+      {centre.dosageDetails && centre.dosageDetails.length > 0 ? (
+        <div style={{ marginTop: 40 }}>
+          <table
+            className="table table-secondary table-hover"
+            style={{ marginTop: 35, marginLeft: 70 }}
+          >
+            <thead>
+              <tr>
+                <th scope="col">S.no.</th>
+                <th scope="col">Date</th>
+                <th scope="col">Number of bookings</th>
+              </tr>
+            </thead>
+            <tbody className="table-group-divider">
+              {centre.dosageDetails.map((centre, index) => (
+                <tr>
+                  <th scope="row">{index + 1}</th>
+                  <td>
+                    {centre.date &&
+                      new Date(centre.date).toLocaleDateString("en-IN")}
+                  </td>
+                  <td>{centre._count}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      ) : null}
     </div>
   );
 }

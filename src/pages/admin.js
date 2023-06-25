@@ -36,8 +36,9 @@ function Admin() {
   }, []);
 
   React.useEffect(() => {
-    const user = localStorage.getItem("admin");
-    if (!(user && user.length > 0)) {
+    const user = localStorage.getItem("user");
+    const userParsed = JSON.parse(user);
+    if (!(user && user.length > 0) || userParsed.type != "admin") {
       route.push("/adminlogin");
     }
   }, []);
@@ -67,9 +68,8 @@ function Admin() {
   };
 
   const logout = () => {
-    localStorage.removeItem("admin");
+    localStorage.removeItem("user");
     route.push("/login");
-    if (localStorage.getItem("admin") === null) route.push("/adminlogin");
   };
 
   return (
@@ -77,7 +77,7 @@ function Admin() {
       <nav className="navbar navbar-expand-lg bg-body-tertiary mb-5">
         <div className="container-fluid">
           <Link className="navbar-brand" href="/centres">
-            Navbar
+            CoviVaccine
           </Link>
           <button
             className="navbar-toggler"
@@ -270,7 +270,7 @@ function Admin() {
                 <td>
                   <Link href={`/dosage_details?centreId=${centre.centre_id}`}>
                     <button className="btn btn-success btn-sm" type="submit">
-                      View details
+                      View dosage details
                     </button>
                   </Link>
                 </td>

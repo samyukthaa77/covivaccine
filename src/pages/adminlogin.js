@@ -16,8 +16,9 @@ function Adminlogin() {
         password: md5(password),
       },
     });
+    const userResult = response.data.data;
     if (response.data.status == 1) {
-      localStorage.setItem("admin", JSON.stringify(adminResult));
+      localStorage.setItem("user", JSON.stringify(userResult));
       route.push("/admin");
     } else {
       alert("Wrong credentials!");

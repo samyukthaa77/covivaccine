@@ -8,7 +8,7 @@ function Profile() {
   const [profile, setProfile] = React.useState([]);
   React.useEffect(() => {
     const getUserProfile = async () => {
-      const response = await axios.get("/user/getProfile");
+      const response = await axios.post("/user/getProfile");
       const profile = response.data.data;
       setProfile(profile);
     };
@@ -33,7 +33,7 @@ function Profile() {
       <nav class="navbar navbar-expand-lg bg-body-tertiary mb-5">
         <div class="container-fluid">
           <Link class="navbar-brand" href="/centres">
-            Navbar
+            CoviVaccine
           </Link>
           <button
             class="navbar-toggler"

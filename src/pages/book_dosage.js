@@ -16,6 +16,7 @@ import {
 function BookDosage() {
   const [showConfirmBookingModal, setConfirmBookingModal] =
     React.useState(false);
+  const [date, setDate] = React.useState("");
   const route = useRouter();
   const [centre, setCentre] = React.useState([]);
 
@@ -40,16 +41,19 @@ function BookDosage() {
     };
     getCentreDetails();
   }, [route.query]);
-  const mapsLink = `centre.link`;
 
   const bookSlot = async () => {
     const response = await axios.post("/user/bookSlot", {
       bookingData: {
         centreId: parseInt(route.query.centreId),
+        date: date,
       },
     });
-    alert("Booked successfully!");
-    route.push("/success");
+    if (response.data.status == 1) {
+      route.push("/success");
+    } else {
+      alert(response.data.message);
+    }
   };
 
   const logout = () => {
@@ -63,7 +67,7 @@ function BookDosage() {
       <nav className="navbar navbar-expand-lg bg-body-tertiary mb-5">
         <div className="container-fluid">
           <Link className="navbar-brand" href="/centres">
-            Navbar
+            CoviVaccine
           </Link>
           <button
             className="navbar-toggler"
@@ -108,16 +112,15 @@ function BookDosage() {
       <div className="row">
         <div className="col-5" style={{ marginLeft: 80, marginBottom: 100 }}>
           <h5>Location of the centre:</h5>
-          {/* <iframe
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3886.400332860947!2d77.649974773506!3d13.073795712632661!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae19a1346d6245%3A0xbc5cafe1b80b1378!2sOia%20Bangalore!5e0!3m2!1sen!2sin!4v1687351265886!5m2!1sen!2sin"
+          <iframe
+            src={centre.link}
             width="500"
             height="350"
             style={{ border: 0 }}
             allowfullscreen=""
             loading="lazy"
             referrerpolicy="no-referrer-when-downgrade"
-          ></iframe> */}
-          <div dangerouslySetInnerHTML={{ __html: centre.link }} />
+          ></iframe>
         </div>
         <div
           className="col-5"
@@ -135,7 +138,11 @@ function BookDosage() {
           </div>
           <div className="mb-5">
             <h5>Choose date:</h5>
-            <p>25-06-2023</p>
+            <input
+              type="date"
+              value={date}
+              onChange={(e) => setDate(e.target.value)}
+            />
           </div>
           <div className="mb-5">
             <Link href={`/book_dosage?centreId=${centre.centre_id}`}>
@@ -175,7 +182,7 @@ function BookDosage() {
               colorScheme="gray"
               mr={3}
               onClick={() => {
-                setShowAddCentreModal(false);
+                setConfirmBookingModal(false);
               }}
             >
               Close

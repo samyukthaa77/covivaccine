@@ -22,7 +22,7 @@ function Success() {
       <nav class="navbar navbar-expand-lg bg-body-tertiary mb-5">
         <div class="container-fluid">
           <Link class="navbar-brand" href="/centres">
-            Navbar
+            CoviVaccine
           </Link>
           <button
             class="navbar-toggler"

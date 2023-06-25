@@ -3,20 +3,6 @@ import { useRouter } from "next/router";
 import Link from "next/link";
 
 function Home() {
-  const route = useRouter();
-  const logout = () => {
-    localStorage.removeItem("user");
-    route.push("/login");
-    if (localStorage.getItem("user") === null) route.push("/login");
-  };
-
-  React.useEffect(() => {
-    const user = localStorage.getItem("user");
-    if (!(user && user.length > 0)) {
-      route.push("/login");
-    }
-  }, []);
-
   return (
     <div>
       <nav class="navbar navbar-expand-lg bg-body-tertiary mb-5">
@@ -53,12 +39,12 @@ function Home() {
                 </Link>
               </li>
             </ul>
-            <Link href="/signup" style={{marginRight: 20}}>
+            <Link href="/signup" style={{ marginRight: 20 }}>
               <button class="btn btn-success" type="submit">
                 Sign Up
               </button>
             </Link>
-            <Link href="/login" style={{marginRight: 10}}>
+            <Link href="/login" style={{ marginRight: 10 }}>
               <button class="btn btn-success" type="submit">
                 Login
               </button>
@@ -67,7 +53,7 @@ function Home() {
         </div>
       </nav>
 
-      <div class="row" style={{marginLeft: 10}}>
+      <div class="row" style={{ marginLeft: 10 }}>
         <div class="col-sm-4 mb-3 mb-sm-0">
           <div class="card" style={{ width: 400 }}>
             <img src="carousel1.jpg" class="card-img-top" alt="" />
@@ -109,7 +95,8 @@ function Home() {
             <div class="card-body">
               <h5 class="card-title">Explore our vaccination centres</h5>
               <p class="card-text">
-                Book your appointment with no hastle and get your vaccination dose as soon as possible!
+                Book your appointment with no hastle and get your vaccination
+                dose as soon as possible!
               </p>
               <Link href="/centres" class="btn btn-primary">
                 View centres
@@ -122,9 +109,14 @@ function Home() {
             <div class="card-body">
               <h5 class="card-title">More information</h5>
               <p class="card-text">
-                Learn more about COVID-19 and get updated with latest news to equip yourself with knowledge about protection against the virus!
+                Learn more about COVID-19 and get updated with latest news to
+                equip yourself with knowledge about protection against the
+                virus!
               </p>
-              <Link href="https://covid19response.who.foundation/" class="btn btn-primary">
+              <Link
+                href="https://covid19response.who.foundation/"
+                class="btn btn-primary"
+              >
                 WHO organization
               </Link>
             </div>
