@@ -36,7 +36,6 @@ function BookDosage() {
         });
         const centre = response.data.data;
         setCentre(centre);
-        console.log(typeof centreId);
       }
     };
     getCentreDetails();
@@ -113,7 +112,7 @@ function BookDosage() {
         <div className="col-5" style={{ marginLeft: 80, marginBottom: 100 }}>
           <h5>Location of the centre:</h5>
           <iframe
-            src={centre.link}
+            src={centre.centreDetails.link}
             width="500"
             height="350"
             style={{ border: 0 }}
@@ -128,12 +127,12 @@ function BookDosage() {
         >
           <div className="mb-5">
             <h5>Address:</h5>
-            <p>{centre.address}</p>
+            <p>{centre.centreDetails.address}</p>
           </div>
           <div className="mb-5">
             <h5>Working hours:</h5>
             <p>
-              {centre.start} - {centre.end}
+              {centre.centreDetails.start} - {centre.centreDetails.end}
             </p>
           </div>
           <div className="mb-5">
@@ -145,7 +144,9 @@ function BookDosage() {
             />
           </div>
           <div className="mb-5">
-            <Link href={`/book_dosage?centreId=${centre.centre_id}`}>
+            <Link
+              href={`/book_dosage?centreId=${centre.centreDetails.centre_id}`}
+            >
               <button
                 className="btn btn-success"
                 type="submit"
