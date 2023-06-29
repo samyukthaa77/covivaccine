@@ -108,58 +108,60 @@ function BookDosage() {
         </div>
       </nav>
 
-      <div className="row">
-        <div className="col-5" style={{ marginLeft: 80, marginBottom: 100 }}>
-          <h5>Location of the centre:</h5>
-          <iframe
-            src={centre.centreDetails.link}
-            width="500"
-            height="350"
-            style={{ border: 0 }}
-            allowfullscreen=""
-            loading="lazy"
-            referrerpolicy="no-referrer-when-downgrade"
-          ></iframe>
-        </div>
-        <div
-          className="col-5"
-          style={{ marginLeft: 90, marginTop: 40, marginBottom: 100 }}
-        >
-          <div className="mb-5">
-            <h5>Address:</h5>
-            <p>{centre.centreDetails.address}</p>
+      {centre && centre.centreDetails ? (
+        <div className="row">
+          <div className="col-5" style={{ marginLeft: 80, marginBottom: 100 }}>
+            <h5>Location of the centre:</h5>
+            <iframe
+              src={centre.centreDetails.link}
+              width="500"
+              height="350"
+              style={{ border: 0 }}
+              allowfullscreen=""
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+            ></iframe>
           </div>
-          <div className="mb-5">
-            <h5>Working hours:</h5>
-            <p>
-              {centre.centreDetails.start} - {centre.centreDetails.end}
-            </p>
-          </div>
-          <div className="mb-5">
-            <h5>Choose date:</h5>
-            <input
-              type="date"
-              value={date}
-              onChange={(e) => setDate(e.target.value)}
-            />
-          </div>
-          <div className="mb-5">
-            <Link
-              href={`/book_dosage?centreId=${centre.centreDetails.centre_id}`}
-            >
-              <button
-                className="btn btn-success"
-                type="submit"
-                onClick={() => {
-                  setConfirmBookingModal(true);
-                }}
+          <div
+            className="col-5"
+            style={{ marginLeft: 90, marginTop: 40, marginBottom: 100 }}
+          >
+            <div className="mb-5">
+              <h5>Address:</h5>
+              <p>{centre.centreDetails.address}</p>
+            </div>
+            <div className="mb-5">
+              <h5>Working hours:</h5>
+              <p>
+                {centre.centreDetails.start} - {centre.centreDetails.end}
+              </p>
+            </div>
+            <div className="mb-5">
+              <h5>Choose date:</h5>
+              <input
+                type="date"
+                value={date}
+                onChange={(e) => setDate(e.target.value)}
+              />
+            </div>
+            <div className="mb-5">
+              <Link
+                href={`/book_dosage?centreId=${centre.centreDetails.centre_id}`}
               >
-                Confirm booking
-              </button>
-            </Link>
+                <button
+                  className="btn btn-success"
+                  type="submit"
+                  onClick={() => {
+                    setConfirmBookingModal(true);
+                  }}
+                >
+                  Confirm booking
+                </button>
+              </Link>
+            </div>
           </div>
         </div>
-      </div>
+      ) : null}
 
       <Modal
         isOpen={showConfirmBookingModal}
